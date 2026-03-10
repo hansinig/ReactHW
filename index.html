@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animal Flashcards</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #fef6f6;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            text-align: center;
+            padding: 40px;
+        }
+
+        h1 {
+            color: #e8a0a0;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+        }
+
+        .buttons-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .animal-btn {
+            padding: 20px 40px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .animal-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .animal-btn:active {
+            transform: translateY(0);
+        }
+
+        .dog { background-color: #ffd6d6; color: #c97878; }
+        .cat { background-color: #d6f0ff; color: #78a7c9; }
+        .cow { background-color: #e8ffd6; color: #8bc978; }
+        .duck { background-color: #fff4d6; color: #c9b078; }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const animals = [
+            { name: "Dog", sound: "woof", className: "dog" },
+            { name: "Cat", sound: "meow", className: "cat" },
+            { name: "Cow", sound: "moo", className: "cow" },
+            { name: "Duck", sound: "quack", className: "duck" }
+        ];
+
+        function AnimalButton({ animal }) {
+            const handleClick = () => {
+                alert(`The ${animal.name.toLowerCase()} says ${animal.sound}!`);
+            };
+
+            return (
+                <button 
+                    className={`animal-btn ${animal.className}`} 
+                    onClick={handleClick}
+                >
+                    {animal.name}
+                </button>
+            );
+        }
+
+        function App() {
+            return (
+                <div className="container">
+                    <h1>Animal Flashcards</h1>
+                    <div className="buttons-container">
+                        {animals.map((animal, index) => (
+                            <AnimalButton key={index} animal={animal} />
+                        ))}
+                    </div>
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
